@@ -1,6 +1,5 @@
 
-import java.util.LinkedHashMap;
-import java.util.Map;
+import Controllers.ValidationControl;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
@@ -12,76 +11,66 @@ import javax.faces.bean.ViewScoped;
 @ViewScoped
 public class IndexManagedBean {
 
-    private String answer1;
+    private String firstName;
 
-    private String answer2;
+    private String lastName;
 
-    private String answer3;
+    private String email;
 
-    private Map<String, Object> question1;
+    private String region;
 
-    private Map<String, Object> question2;
+    private String age;
 
-    private Map<String, Object> question3;
+    private String sex;
 
-    public String getAnswer1() {        
-        return answer1;
+    private boolean firstView = true;
+
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setAnswer1(String answer1) {
-        this.answer1 = answer1;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getAnswer2() {
-        return answer2;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setAnswer2(String answer2) {
-        this.answer2 = answer2;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
-    public String getAnswer3() {
-        return answer3;
+    public String getEmail() {
+        return email;
     }
 
-    public void setAnswer3(String answer3) {
-        this.answer3 = answer3;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public Map<String, Object> getQuestion1() {
-        question1 = new LinkedHashMap<String, Object>();
-        question1.put("Dog", "Dog"); //label, value
-        question1.put("Cat", "Cat");
-        question1.put("Bird", "Bird");
-        return question1;
+    public String getRegion() {
+        return region;
     }
 
-    public void setQuestion1(Map<String, Object> question1) {
-        this.question1 = question1;
+    public void setRegion(String region) {
+        this.region = region;
     }
 
-    public Map<String, Object> getQuestion2() {
-        question2 = new LinkedHashMap<String, Object>();
-        question2.put("10 - 18", "10-18"); //label, value
-        question2.put("20 - 25", "20-25");
-        question2.put("30 - 35", "30-35");
-        return question2;
+    public String getAge() {
+        return age;
     }
 
-    public void setQuestion2(Map<String, Object> question2) {
-        this.question2 = question2;
+    public void setAge(String age) {
+        this.age = age;
     }
 
-    public Map<String, Object> getQuestion3() {
-        question3 = new LinkedHashMap<String, Object>();
-        question3.put("Google search", "google"); //label, value
-        question3.put("Bing search", "bing");
-        question3.put("Yahoo search", "yahoo");
-        return question3;
+    public String getSex() {
+        return sex;
     }
 
-    public void setQuestion3(Map<String, Object> question3) {
-        this.question3 = question3;
+    public void setSex(String sex) {
+        this.sex = sex;
     }
 
     /**
@@ -89,24 +78,31 @@ public class IndexManagedBean {
      */
     public IndexManagedBean() {
     }
-    
+
     public String getAccess() {
-        if (answer1 == null || answer2 == null || answer3 == null || answer1.equals("") || answer2.equals("") || answer3.equals("")) {
-            return "Please answer the question";
-        } else {
-            return "<form name=\"login\" method=\"post\" action=\"http://192.168.11.1:5280/\">\n"
-                    + "\n"
-                    + "<div align=\"center\">\n"
-                    + "\n"
-                    + "  <input type=\"hidden\" name=\"accept_terms\" value=\"yes\" />   <input type=\"hidden\" name=\"redirect\" value=\"https://facebook.com\">\n"
-                    + "\n"
-                    + "  <input type=\"hidden\" name=\"mode_login\">\n"
-                    + "\n"
-                    + "  <input type=\"submit\" value=\"Click here to continue\">\n"
-                    + "\n"
-                    + "</div>";
+        if (firstView) {
+            firstView = false;
+            return "";
         }
-        
+        if ((firstName != null && lastName != null && email != null && age != null) && (!firstName.equals("") && !lastName.equals("") && !email.equals("") && !region.equals("Question") && !age.equals(""))) {
+            if (ValidationControl.isValidEmailAddress(email)) {
+                return "<form name=\"login\" method=\"post\" action=\"http://192.168.11.1:5280/\">\n"
+                        + "\n"
+                        + "<div align=\"center\">\n"
+                        + "\n"
+                        + "  <input type=\"hidden\" name=\"accept_terms\" value=\"yes\" />   <input type=\"hidden\" name=\"redirect\" value=\"https://facebook.com\">\n"
+                        + "\n"
+                        + "  <input type=\"hidden\" name=\"mode_login\">\n"
+                        + "\n"
+                        + "  <input type=\"submit\" value=\"Bấm vào đây để tiếp tục\">\n"
+                        + "\n"
+                        + "</div>";
+            } else {
+                return "<br/> Địa chỉ email không hợp lệ";
+            }
+
+        }
+        return "<br/> Xin vui lòng điền đầy đủ thông tin";
     }
 
 }

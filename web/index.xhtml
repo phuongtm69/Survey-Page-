@@ -2,56 +2,150 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
     <h:head>
-        <title>Survey Page Demo</title>
+        <!-- Basic Page Needs -->
+        <meta charset="utf-8" />
+        <title>PAT | Survey Page</title>
+        <meta name="description" content="" />
+        <meta name="author" content="Ansonika" />
+
+        <!-- Favicons-->
+        <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+        <link rel="apple-touch-icon" type="image/x-icon" href="img/apple-touch-icon-57x57-precomposed.png" />
+        <link rel="apple-touch-icon" type="image/x-icon" sizes="72x72" href="img/apple-touch-icon-72x72-precomposed.png" />
+        <link rel="apple-touch-icon" type="image/x-icon" sizes="114x114" href="img/apple-touch-icon-114x114-precomposed.png" />
+        <link rel="apple-touch-icon" type="image/x-icon" sizes="144x144" href="img/apple-touch-icon-144x144-precomposed.png" />
+
+        <!-- Mobile Specific Metas -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <!-- CSS -->
+        <link href="css/bootstrap.css" rel="stylesheet" />
+        <link href="css/style.css" rel="stylesheet" />
+        <link href="font-awesome/css/font-awesome.css" rel="stylesheet" />
+        <link href="css/socialize-bookmarks.css" rel="stylesheet" />
+
+        <link href="check_radio/skins/square/aero.css" rel="stylesheet" />
+
+        <!-- Toggle Switch -->
+        <link rel="stylesheet" href="css/jquery.switch.css" />
+
+        <!-- Owl Carousel Assets -->
+        <link href="css/owl.carousel.css" rel="stylesheet" />
+        <link href="css/owl.theme.css" rel="stylesheet" />
+
+        <!-- Google web font -->
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800,300' rel='stylesheet' type='text/css' />
+
+        <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+        <!-- Jquery -->
+        <script src="js/jquery-1.10.2.min.js"></script>
+        <script src="js/jquery-ui-1.8.12.min.js"></script>
+
+        <!-- Wizard-->
+        <script src="js/jquery.wizard.js"></script>
+
+        <!-- Radio and checkbox styles -->
+        <script src="check_radio/jquery.icheck.js"></script>
+
+        <!-- HTML5 and CSS3-in older browsers-->
+        <script src="js/modernizr.custom.17475.js"></script>
+
+        <!-- Support media queries for IE8 -->
+        <script src="js/respond.min.js"></script>
+
+
+
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     </h:head>
     <h:body>
         <h:form>
-            1. What is your favorite pet? :
-            <h:selectOneRadio id="answer1" value="#{indexManagedBean.answer1}">
-                <f:selectItems value="#{indexManagedBean.question1}" />
-            </h:selectOneRadio>
+            <section class="container" id="main">
 
-            <br />
+                <!-- Start Survey container -->
+                <div id="survey_container">
 
-            2. How old are you? :
-            <h:selectOneRadio id="answer2" value="#{indexManagedBean.answer2}">
-                <f:selectItems value="#{indexManagedBean.question2}" />
-            </h:selectOneRadio>
 
-            <br />
 
-            3. What is your favorite search engine? :
-            <h:selectOneRadio id="answer3" value="#{indexManagedBean.answer3}">
-                <f:selectItems value="#{indexManagedBean.question3}" />
-            </h:selectOneRadio>
+                    <div id="middle-wizard">
+                        <div class="step">
+                            <div class="row">
+                                <h3 class="col-md-10">Truy cập WIFI bằng cách hoàn thành khảo sát dưới đây</h3>
+                                <div class="col-md-6">
+                                    <ul class="data-list">
+                                        <li><h:inputText id="fname" class="form-control" p:placeholder="Tên" value="#{indexManagedBean.firstName}"/></li>
+                                        <li><h:inputText id="lname" class="form-control" p:placeholder="Họ" value="#{indexManagedBean.lastName}"/></li>
+                                        <li><h:inputText id="email" class="form-control" p:placeholder="Địa chỉ thư điện tử" value="#{indexManagedBean.email}"/></li>
+                                    </ul>
+                                </div><!-- end col-md-6 -->
 
-            <br />
+                                <div class="col-md-6">
 
-            <table>
-                <tr>
-                    <td><h:commandButton value="Enter">
-                            <f:ajax execute="answer1 answer2 answer3" render="output answer1OP answer2OP answer3OP"/>
-                        </h:commandButton></td>
-                    <td><h:commandButton value="Reset" type="reset" /></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td><h:outputText id="output" value="#{indexManagedBean.access}" escape="false"/></td>
-                </tr>
-                <tr>
-                    <td>Answer 1 : <h:outputText id="answer1OP" value="#{indexManagedBean.answer1}" /> </td>
-                </tr>
-                <tr>
-                    <td>Answer 2 : <h:outputText id="answer2OP" value="#{indexManagedBean.answer2}" /> </td>
-                </tr>
-                <tr>
-                    <td>Answer 3 : <h:outputText id="answer3OP" value="#{indexManagedBean.answer3}" /> </td>
-                </tr>
-            </table>
-            
+                                    <ul class="data-list">
+                                        <li>
+                                            <div class="styled-select">
+                                                <h:selectOneMenu id="region" class="form-control" value="#{indexManagedBean.region}">
+                                                    <f:selectItem itemValue="Question" itemLabel="Bạn đến từ đâu?" />
+                                                    <f:selectItem itemValue="Europe" itemLabel="Châu Âu" />
+                                                    <f:selectItem itemValue="Asia" itemLabel="Châu Á" />
+                                                    <f:selectItem itemValue="North America" itemLabel="Bắc Mỹ" />
+                                                    <f:selectItem itemValue="South America" itemLabel="Nam Mỹ" />
+                                                </h:selectOneMenu>
+                                            </div>
+                                        </li>
+                                    </ul>
+
+                                    <ul class="data-list floated clearfix">
+                                        
+                                        <li><input name="gender" type="radio" class="required" value="Male" checked="true"/><label class="label_gender"> Nam</label></li>
+                                        <li><input name="gender" type="radio" class="required" value="Female" /><label class="label_gender"> Nữ</label></li>
+                                    </ul>
+                                    <br/>
+                                    <ul class="data-list floated clearfix">
+                                        <li id="age"><h:inputText id="age" class="form-control" value="#{indexManagedBean.age}"/> </li>                                      
+                                    </ul>
+
+                                </div><!-- end col-md-6 -->
+                            </div><!-- end row -->
+
+
+
+                        </div><!-- end step-->
+
+                    </div><!-- end middle-wizard -->
+
+                    <div id="bottom-wizard">
+
+                        <h:commandButton value="Hoàn thành">
+                            <f:ajax execute="fname lname email region age" render="output"/>
+                        </h:commandButton>
+                        <h:outputText id="output" value="#{indexManagedBean.access}" escape="false"/>
+
+                    </div><!-- end bottom-wizard -->
+
+
+                </div><!-- end Survey container -->
+
+
+            </section><!-- end section main container -->
+
         </h:form>
+        <!-- OTHER JS --> 
+        <script src="js/jquery.validate.js"></script>
+        <script src="js/jquery.placeholder.js"></script>
+        <script src="js/jquery.tweetable.min.js"></script> 
+        <script src="js/jquery.switch.min.js"></script>
+        <script src="js/quantity-bt.js"></script>
+        <script src="js/bootstrap.js"></script>
+        <script src="js/retina.js"></script>
+        <script src="js/owl.carousel.min.js"></script>
+        <script src="js/functions.js"></script>
+
     </h:body>
 </html>
 
